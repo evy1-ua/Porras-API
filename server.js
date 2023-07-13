@@ -46,21 +46,21 @@ connection.connect((error) => {
     console.log("Conectado correctamente a la base de datos");
   }
 });
-// Configuración de la carpeta de archivos estáticos
- const url = path.join(__dirname, "..", "client", "build");
- app.use(express.static(url));
- console.log(url)
- // Ruta para todas las solicitudes que no sean a los archivos estáticos
- app.get("*", (req, res) => {
-   res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
- });
+// // Configuración de la carpeta de archivos estáticos
+//  const url = path.join(__dirname, "..", "client", "build");
+//  app.use(express.static(url));
+//  console.log(url)
+//  // Ruta para todas las solicitudes que no sean a los archivos estáticos
+//  app.get("*", (req, res) => {
+//    res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
+//  });
 
-// Configurar el motor de vistas
-  const viewsPath = path.join(__dirname, '..', 'client', 'src','views');
-  app.set('views', viewsPath);
-  console.log('Ruta de las vistas:', viewsPath);
-  app.set("view engine", "jsx");
-  app.engine("jsx", require("express-react-views").createEngine());
+// // Configurar el motor de vistas
+//   const viewsPath = path.join(__dirname, '..', 'client', 'src','views');
+//   app.set('views', viewsPath);
+//   console.log('Ruta de las vistas:', viewsPath);
+//   app.set("view engine", "jsx");
+//   app.engine("jsx", require("express-react-views").createEngine());
 
 // Definición de rutas
  const routes = require("./routes/pages");
