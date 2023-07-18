@@ -38,7 +38,7 @@ router.get('/logout', (req, res) => {
     res.json({user: req.user});
    } else{
      console.log('Sesión no iniciada');
-     res.redirect('/');
+     res.json({ user: null});
    }
  });
 
