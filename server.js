@@ -56,11 +56,11 @@ connection.connect((error) => {
 //  });
 
 // // Configurar el motor de vistas
-//   const viewsPath = path.join(__dirname, '..', 'client', 'src','views');
-//   app.set('views', viewsPath);
-//   console.log('Ruta de las vistas:', viewsPath);
-//   app.set("view engine", "jsx");
-//   app.engine("jsx", require("express-react-views").createEngine());
+   const viewsPath = "https://porras-site.up.railway.app/src/views";
+   app.set('views', viewsPath);
+   console.log('Ruta de las vistas:', viewsPath);
+   app.set("view engine", "jsx");
+   app.engine("jsx", require("express-react-views").createEngine());
 
 // Definición de rutas
  const routes = require("./routes/pages");
