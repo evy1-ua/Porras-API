@@ -130,7 +130,7 @@ router.get('/logout', (req, res) => {
 })
 
 
- router.get('/dashboard', passport.authenticate('local'), (req,res) => {
+ router.get('/dashboard', (req,res) => {
   console.log("estoy en post de login");
    if(req.isAuthenticated()) {
      console.log('Sesión iniciada');
