@@ -10,12 +10,13 @@ passport.use(new LocalStrategy(
   },
   async (email, password, done) => {
     try {
-      console.log("Estoy en passport.js");
+      
       // Lógica de autenticación, por ejemplo, buscar el usuario en la base de datos y verificar las credenciales
       const user = await User.findOneByEmail(email);
       if (!user || !user.comparePassword(password)) {
         return done(null, false, { message: 'Credenciales inválidas' });
       }
+      console.log("Estoy en passport.js");
       return done(null, user);
     } catch (error) {
       return done(error);

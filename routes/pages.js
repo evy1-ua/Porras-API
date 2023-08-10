@@ -104,14 +104,16 @@ router.post('/login', (req, res, next) => {
     }
     if (!user) {
       // Autenticación fallida, redirigir a /login
-      return res.redirect('/login');
+      return res.status(400).json({ success: false, message: 'Credenciales inválidas' });
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
+      console.log(user);
       // Autenticación exitosa, redirigir a /dashboard
-      return res.redirect('/dashboard');
+      return res.status(200).json({ success: true, message: 'Autenticación exitosa', user: user });
+      
     });
   })(req, res, next);
 });

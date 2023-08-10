@@ -1,4 +1,4 @@
-const passport = require('../config/passport');
+const passport = require("passport");
 const express = require("express");
 const session = require("express-session");
 const authMiddleware = (req, res, next) => {
