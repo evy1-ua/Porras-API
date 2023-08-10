@@ -186,7 +186,7 @@ class User {
     return new Promise((resolve, reject) => {
       const query = "SELECT * FROM Usuarios WHERE id = ?";
       const values = [id];
-
+      console.log("estoy en findbyid");
       connection.query(query, values, (error, results) => {
         if (error) {
           reject(error);
