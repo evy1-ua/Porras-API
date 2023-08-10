@@ -97,10 +97,25 @@ function checkAuthenticated(req, res, next) {
   }
   next();
 }
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/dashboard', // Redirigir en caso de autenticación exitosa
-  failureRedirect: '/login' // Redirigir en caso de autenticación fallida
-}));
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    if (!user) {
+      // Autenticación fallida, redirigir a /login
+      return res.redirect('/login');
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      // Autenticación exitosa, redirigir a /dashboard
+      return res.redirect('/dashboard');
+    });
+  })(req, res, next);
+});
+
 
 
 

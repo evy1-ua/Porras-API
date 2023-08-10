@@ -16,7 +16,6 @@ passport.use(new LocalStrategy(
       if (!user || !user.comparePassword(password)) {
         return done(null, false, { message: 'Credenciales inválidas' });
       }
-     console.log(user);
       return done(null, user);
     } catch (error) {
       return done(error);
