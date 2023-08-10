@@ -110,7 +110,7 @@ router.post('/login', (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log(user);
+      console.log(req.user);
       // Autenticación exitosa, redirigir a /dashboard
       return res.status(200).json({ success: true, message: 'Autenticación exitosa', user: user });
       
@@ -131,9 +131,15 @@ router.get('/logout',  (req, res) => {
   res.redirect('/')
 })
 
-
- router.get('/dashboard', (req,res) => {
-  console.log("estoy en get de dashboard");
+const ensureAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    return res.status(401).json({ error: "No autenticado" });
+  }
+};
+ router.get('/dashboard', ensureAuthenticated, (req,res) => {
+  console.log("Usuario autenticado:", req.user);
   res.status(200).json({ user: req.user });
  });
 //  router.get('/dashboard/curso/:id', authMiddleware, (req,res) => {

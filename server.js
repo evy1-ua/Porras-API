@@ -29,10 +29,11 @@ app.use(cookieParser('secret-key'));
 app.use(
   session({
     secret: "secret-key",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
   })
 );
+
 
 // Iniciar Passport y establecer conexión
 app.use(passport.initialize());
