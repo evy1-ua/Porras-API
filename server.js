@@ -1,6 +1,7 @@
 
 const express = require("express");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const passport = require("passport");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -9,6 +10,8 @@ const dotenv = require("dotenv");
 const dbConfig = require("./config/dbConnection");
 const mysql = require("mysql2");
 const { exec } = require("child_process");
+const multer = require("multer");
+
 
 
 
@@ -21,17 +24,22 @@ const app = express();
 // Habilitar CORS
 app.use(cors());
 
+app.use(cookieParser('secret-key'));
 //Configuración de la sesión
 app.use(
   session({
     secret: "secret-key",
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
   })
 );
+
 // Iniciar Passport y establecer conexión
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Importamos nuestra Estrategia Local
+const passport_config = require("./config/passport");
 
 // Middleware para analizar el cuerpo de las solicitudes en formato JSON
 app.use(bodyParser.json());
@@ -46,21 +54,6 @@ connection.connect((error) => {
     console.log("Conectado correctamente a la base de datos");
   }
 });
-// // Configuración de la carpeta de archivos estáticos
-//  const url = path.join(__dirname, "..", "client", "build");
-//  app.use(express.static(url));
-//  console.log(url)
-//  // Ruta para todas las solicitudes que no sean a los archivos estáticos
-//  app.get("*", (req, res) => {
-//    res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
-//  });
-
-// // Configurar el motor de vistas
-   const viewsPath = "https://porras-site.up.railway.app/src/views";
-   app.set('views', viewsPath);
-   console.log('Ruta de las vistas:', viewsPath);
-   app.set("view engine", "jsx");
-   app.engine("jsx", require("express-react-views").createEngine());
 
 // Definición de rutas
  const routes = require("./routes/pages");

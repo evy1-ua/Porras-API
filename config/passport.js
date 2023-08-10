@@ -10,13 +10,13 @@ passport.use(new LocalStrategy(
   },
   async (email, password, done) => {
     try {
-      console.log("passport");
+      console.log("Estoy en passport.js");
       // Lógica de autenticación, por ejemplo, buscar el usuario en la base de datos y verificar las credenciales
       const user = await User.findOneByEmail(email);
-
       if (!user || !user.comparePassword(password)) {
         return done(null, false, { message: 'Credenciales inválidas' });
       }
+     console.log(user);
       return done(null, user);
     } catch (error) {
       return done(error);
@@ -31,7 +31,9 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
+    console.log(user);
     done(null, user);
+
   } catch (error) {
     done(error);
   }

@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const { format } = require('date-fns');
 
 const UserController = {
   getAllUsers: (req, res) => {
@@ -12,8 +13,8 @@ const UserController = {
   },
 
   createUser: (req, res) => {
-    const { name, email, password } = req.body;
-    const newUser = new User(null, name, email, password);
+    const { nombre, apellidos,fecha_nacimiento,fecha_ingreso,rol,foto,contraseña,correo_electronico,telefono,direccion } = req.body;
+    const newUser = new User(null, nombre, apellidos, fecha_nacimiento,format(new Date(), 'yyyy-MM-dd HH:mm:ss'),rol,foto,contraseña,correo_electronico,telefono,direccion);
 
     newUser.save((error, savedUser) => {
       if (error) {
@@ -50,9 +51,15 @@ const UserController = {
     });
   },
 
-  getHelloWorld7: (req, res) => {
-    res.send("Hola Mundo7");
-  }
+  getLastUsers: (req, res) => {
+    User.getLastUsers((error, users) => {
+      if (error) {
+        console.error('Error al obtener los últimos usuarios:', error);
+        return res.status(500).json({ error: 'Error al obtener los últimos usuarios' });
+      }
+      res.json(users);
+    });
+  },
 };
 
 module.exports = UserController;
