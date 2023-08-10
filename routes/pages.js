@@ -132,7 +132,7 @@ router.get('/logout',  (req, res) => {
 })
 
 
- router.get('/dashboard', passport.authenticate('local', {session: false}), (req,res) => {
+ router.get('/dashboard', (req,res) => {
   console.log("estoy en get de dashboard");
   res.status(200).json({ user: req.user });
  });
