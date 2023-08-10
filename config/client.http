@@ -1,0 +1,11 @@
+GET https://porras-api-production.up.railway.app/api
+###
+POST https://porras-api-production.up.railway.app/login
+Content-Type: application/json
+
+{
+    "email": "admin@gmail.com",
+    "password": "1234"
+}
+###
+GET https://porras-api-production.up.railway.app/dashboard
