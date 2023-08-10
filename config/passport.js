@@ -5,39 +5,47 @@ const User = require('../models/user');
 
 passport.use(new LocalStrategy(
   {
-    usernameField: 'email',
-    passwordField: 'password',
+    // Configuración de la estrategia
   },
   async (email, password, done) => {
     try {
-      
-      // Lógica de autenticación, por ejemplo, buscar el usuario en la base de datos y verificar las credenciales
-      const user = await User.findOneByEmail(email);
+      console.log("Estrategia de autenticación en proceso...");
+
+      // Lógica de autenticación
+
       if (!user || !user.comparePassword(password)) {
+        console.log("Autenticación fallida");
         return done(null, false, { message: 'Credenciales inválidas' });
       }
-      console.log("Estoy en passport.js");
+
+      console.log("Autenticación exitosa");
       return done(null, user);
     } catch (error) {
+      console.error("Error en la estrategia de autenticación:", error);
       return done(error);
     }
   }
 ));
 
 passport.serializeUser((user, done) => {
+  console.log("Serializando usuario:", user.id);
   done(null, user.id);
 });
 
 passport.deserializeUser(async (id, done) => {
   try {
+    console.log("Deserializando usuario:", id);
     const user = await User.findById(id);
-    console.log(user);
-    if(!user){
-      return done(null,false);
-    }
-    done(null, user);
 
+    if (!user) {
+      console.log("Usuario no encontrado");
+      return done(null, false);
+    }
+
+    console.log("Usuario deserializado:", user);
+    done(null, user);
   } catch (error) {
+    console.error("Error en la deserialización de usuario:", error);
     done(error);
   }
 });
