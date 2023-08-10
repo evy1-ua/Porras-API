@@ -91,12 +91,12 @@ router.get('/api/courses/:id/getSemanas', CursoController.getSemanasByCursoId)
 
 
 // Función de middleware para verificar la autenticación
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return res.redirect('/dashboard');
-  }
-  next();
-}
+// function checkAuthenticated(req, res, next) {
+//   if (req.isAuthenticated()) {
+//     return res.redirect('/dashboard');
+//   }
+//   next();
+// }
 router.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     if (err) {
@@ -136,15 +136,15 @@ router.get('/logout',  (req, res) => {
   console.log("estoy en get de dashboard");
   res.status(200).json({ user: req.user });
  });
- router.get('/dashboard/curso/:id', authMiddleware, (req,res) => {
-   if(req.user) {
-     console.log('Sesión iniciada');
-    res.json({user: req.user});
-   } else{
-     console.log('Sesión no iniciada');
-     res.redirect('/');
-   }
- });
+//  router.get('/dashboard/curso/:id', authMiddleware, (req,res) => {
+//    if(req.user) {
+//      console.log('Sesión iniciada');
+//     res.json({user: req.user});
+//    } else{
+//      console.log('Sesión no iniciada');
+//      res.redirect('/');
+//    }
+//  });
 
 router.get('/users', UserController.getAllUsers);
 router.post('/users', UserController.createUser);
