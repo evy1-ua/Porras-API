@@ -132,15 +132,9 @@ router.get('/logout',  (req, res) => {
 })
 
 
- router.get('/dashboard',authMiddleware, (req,res) => {
+ router.get('/dashboard', passport.authenticate('local', {session: false}), (req,res) => {
   console.log("estoy en get de dashboard");
-   if(req.isAuthenticated()) {
-     console.log('Sesión iniciada');
-    res.json({user: req.user});
-   } else{
-     console.log('Sesión no iniciada');
-     res.redirect('/');
-   }
+  res.status(200).json({ user: req.user });
  });
  router.get('/dashboard/curso/:id', authMiddleware, (req,res) => {
    if(req.user) {

@@ -11,7 +11,7 @@ const authMiddleware = (req, res, next) => {
   } else {
     // El usuario no está autenticado, redirigir a la página de inicio de sesión
     console.log("Usuario no autenticado");
-    res.redirect('/login');
+    res.status(401).json({ error: 'No autenticado' });
   }
 };
 
