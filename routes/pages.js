@@ -119,7 +119,7 @@ router.post('/login', (req, res, next) => {
 
 
 
-router.get('/logout', (req, res) => {
+router.get('/logout',  (req, res) => {
   req.logout( function(err) {
     if(err){
       console.error(error);
@@ -130,8 +130,8 @@ router.get('/logout', (req, res) => {
 })
 
 
- router.get('/dashboard', (req,res) => {
-  console.log("estoy en post de login");
+ router.get('/dashboard',passport.authenticate('local'), (req,res) => {
+  console.log("estoy en get de dashboard");
    if(req.isAuthenticated()) {
      console.log('Sesión iniciada');
     res.json({user: req.user});

@@ -9,3 +9,6 @@ Content-Type: application/json
 }
 ###
 GET https://porras-api-production.up.railway.app/dashboard
+
+###
+GET https://porras-api-production.up.railway.app/logout
