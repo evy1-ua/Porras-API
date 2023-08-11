@@ -152,17 +152,10 @@ const ensureAuthenticated = (req, res, next) => {
     return res.status(401).json({ error: "No autenticado" });
   }
 };
-router.get('/dashboard', passport.authenticate('local'), (req, res, next) => {
-  // Si la autenticación fue exitosa, el usuario se almacenará en req.user
+ router.get('/dashboard', ensureAuthenticated, (req,res) => {
   console.log("Usuario autenticado:", req.user);
   res.status(200).json({ user: req.user });
-}, (err, req, res, next) => {
-  // Si la autenticación falla, passport.authenticate generará un error
-  // y este middleware manejará ese error para devolver un status 401
-  console.log("Autenticación fallida:", err.message);
-  res.status(401).json({ error: 'Autenticación fallida' });
-});
-
+ });
 //  router.get('/dashboard/curso/:id', authMiddleware, (req,res) => {
 //    if(req.user) {
 //      console.log('Sesión iniciada');
