@@ -1,4 +1,5 @@
-GET https://porras-api-production.up.railway.app/api
+### Bienvenida a la API
+GET https://porras-api-production.up.railway.app/
 ###
 POST https://porras-api-production.up.railway.app/login
 Content-Type: application/json
@@ -9,6 +10,6 @@ Content-Type: application/json
 }
 ###
 GET https://porras-api-production.up.railway.app/dashboard
-
 ###
 GET https://porras-api-production.up.railway.app/logout
+

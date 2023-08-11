@@ -153,13 +153,17 @@ const ensureAuthenticated = (req, res, next) => {
     return res.status(401).json({ error: "No autenticado" });
   }
 };
- router.get('/dashboard', (req,res) => {
-  if(req.isAuthenticated()){
-    console.log("Usuario autenticado:", req.user);
-  res.status(200).json({ user: req.user });
-  }
-  
- });
+router.get('/dashboard', (req, res, next) => {
+  passport.authenticate('local',(err,user,info) =>{
+    if(err){
+      return next(err);
+    }
+    if(req.isAuthenticated()){
+      return res.status(200).json({ success: true, message: 'Autenticación exitosa', user: user });
+    }
+  })
+});
+
 //  router.get('/dashboard/curso/:id', authMiddleware, (req,res) => {
 //    if(req.user) {
 //      console.log('Sesión iniciada');
