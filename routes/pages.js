@@ -125,7 +125,6 @@ router.post('/login', (req, res, next) => {
       if (err) {
         return next(err);
       }
-      console.log(req.user);
       // Autenticación exitosa, redirigir a /dashboard
       return res.status(200).json({ success: true, message: 'Autenticación exitosa', user: user });
       
@@ -147,7 +146,7 @@ router.get('/logout',  (req, res) => {
 })
 
 const ensureAuthenticated = (req, res, next) => {
-  console.log(req);
+  console.log(req.body);
   if (req.isAuthenticated()) {
     return next();
   } else {
