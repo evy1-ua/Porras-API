@@ -147,8 +147,8 @@ router.get('/logout',  (req, res) => {
 })
 
 const ensureAuthenticated = (req, res, next) => {
-  console.log(req.body);
-  if (req.logIn()) {
+  console.log(req.user);
+  if (req.isAuthenticated()) {
     return next();
   } else {
     return res.status(401).json({ error: "No autenticado" });
