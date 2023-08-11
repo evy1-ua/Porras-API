@@ -153,9 +153,12 @@ const ensureAuthenticated = (req, res, next) => {
     return res.status(401).json({ error: "No autenticado" });
   }
 };
- router.get('/dashboard', ensureAuthenticated, (req,res) => {
-  console.log("Usuario autenticado:", req.user);
+ router.get('/dashboard', (req,res) => {
+  if(req.isAuthenticated()){
+    console.log("Usuario autenticado:", req.user);
   res.status(200).json({ user: req.user });
+  }
+  
  });
 //  router.get('/dashboard/curso/:id', authMiddleware, (req,res) => {
 //    if(req.user) {
