@@ -11,7 +11,8 @@ const dbConfig = require("./config/dbConnection");
 const mysql = require("mysql2");
 const { exec } = require("child_process");
 const multer = require("multer");
-
+// Importamos nuestra Estrategia Local
+const passport_config = require("./config/passport");
 
 
 
@@ -25,6 +26,11 @@ const app = express();
 app.use(cors());
 
 app.use(cookieParser('secret-key'));
+
+// Middleware para analizar el cuerpo de las solicitudes en formato JSON
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //Configuración de la sesión
 app.use(
   session({
@@ -34,8 +40,7 @@ app.use(
   })
 );
 
-// Importamos nuestra Estrategia Local
-const passport_config = require("./config/passport");
+
 
 // Iniciar Passport y establecer conexión
 app.use(passport.initialize());
@@ -43,9 +48,7 @@ app.use(passport.session());
 
 
 
-// Middleware para analizar el cuerpo de las solicitudes en formato JSON
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // Comprobación de Conexión a la base de datos
 const connection = mysql.createConnection(dbConfig);
