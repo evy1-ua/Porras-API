@@ -42,7 +42,9 @@ const upload = multer({ storage });
     res.json({ "users": ["userOne","userTwo","userThree"]});
  });
 
- 
+ router.get('/', (req, res) => {
+  res.status(200).json({message:'Bienvenido a la API de Porras'});
+ })
 
 
  //Cursos
