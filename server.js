@@ -34,13 +34,14 @@ app.use(
   })
 );
 
+// Importamos nuestra Estrategia Local
+const passport_config = require("./config/passport");
 
 // Iniciar Passport y establecer conexión
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Importamos nuestra Estrategia Local
-const passport_config = require("./config/passport");
+
 
 // Middleware para analizar el cuerpo de las solicitudes en formato JSON
 app.use(bodyParser.json());

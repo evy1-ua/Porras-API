@@ -43,7 +43,19 @@ const upload = multer({ storage });
  });
 
  router.get('/', (req, res) => {
-  res.status(200).json({message:'Bienvenido a la API de Porras'});
+  const htmlResponse = `
+    <html>
+      <head>
+        <title>Bienvenido a la API de Porras</title>
+      </head>
+      <body>
+        <h1>¡Bienvenido a la API de Porras!</h1>
+        <p>Esta es una API de ejemplo para mostrar mensajes de bienvenida.</p>
+      </body>
+    </html>
+  `;
+
+  res.status(200).send(htmlResponse);
  })
 
 
