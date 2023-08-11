@@ -67,7 +67,6 @@ connection.connect((error) => {
 //Configuramos el puerto
 const port = process.env.PORT || 5000;
 
-console.log(passport.session.name);
 /* Modo desarrolador*/
 // Iniciamos el servidor
 const server = app.listen(port, () => {

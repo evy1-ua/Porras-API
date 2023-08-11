@@ -31,12 +31,14 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
-    if(!user){
-      return done(null,false);
+    if (!user) {
+      console.log("Usuario no encontrado");
+      return done(null, false);
     }
+    console.log("Usuario encontrado:", user);
     done(null, user);
-
   } catch (error) {
+    console.error("Error al buscar usuario:", error);
     done(error);
   }
 });
