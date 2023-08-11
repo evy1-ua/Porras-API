@@ -152,7 +152,7 @@ const ensureAuthenticated = (req, res, next) => {
     return res.status(401).json({ error: "No autenticado" });
   }
 };
- router.get('/dashboard', ensureAuthenticated, (req,res) => {
+ router.get('/dashboard', passport.authenticate('local'), (req,res) => {
   console.log("Usuario autenticado:", req.user);
   res.status(200).json({ user: req.user });
  });
